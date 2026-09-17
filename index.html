@@ -234,12 +234,31 @@ body{
   .ticket-bloc,.ticket,.conditions{break-inside:avoid;}
   .entete{padding-top:0;}
 }
+/* ---------- Animations ---------- */
 @media (prefers-reduced-motion:no-preference){
-  .ticket-bloc{animation:apparait .6s ease both;}
-  .ticket-bloc:nth-child(2){animation-delay:.09s;}
-  .ticket-bloc:nth-child(3){animation-delay:.18s;}
-  @keyframes apparait{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  /* apparition au defilement */
+  .revele{opacity:0;transform:translateY(18px);}
+  .revele.vu{
+    opacity:1;
+    transform:none;
+    transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .revele.vu.retard-1{transition-delay:.08s;}
+  .revele.vu.retard-2{transition-delay:.16s;}
+
+  /* respiration des boutons : signale qu'ils sont cliquables sans attirer l'oeil */
+  .bouton{animation:respire 3.6s ease-in-out infinite;}
+  .bouton:nth-child(2){animation-delay:1.8s;}
+  .bouton:hover,.bouton:focus-visible{animation:none;}
+  @keyframes respire{
+    0%,68%,100%{box-shadow:0 0 0 0 rgba(16,15,13,0);transform:none;}
+    80%{box-shadow:0 0 0 4px rgba(16,15,13,.12);transform:translateY(-1px);}
+    92%{box-shadow:0 0 0 7px rgba(16,15,13,0);transform:none;}
+  }
+  .bouton svg{transition:transform .25s ease;}
+  .bouton:hover svg,.bouton:focus-visible svg{transform:translateX(2px);}
 }
+.bouton:active{transform:translateY(1px);}
 @media (max-width:420px){
   .ticket-bloc .actions{padding-left:0;}
   .ticket{gap:10px;}
@@ -375,6 +394,28 @@ body{
   }
   afficher();
   setInterval(afficher, 1000);
+
+  /* ----- Apparition progressive des blocs ----- */
+  var animationsOk = !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (animationsOk && 'IntersectionObserver' in window){
+    var blocs = document.querySelectorAll('.entete h1, .entete .script, .rebours, .ticket-bloc, .billet, .conditions');
+    for (var b = 0; b < blocs.length; b++){
+      blocs[b].classList.add('revele');
+      if (blocs[b].classList.contains('ticket-bloc') || blocs[b].classList.contains('billet')){
+        blocs[b].classList.add(b % 2 ? 'retard-1' : 'retard-2');
+      }
+    }
+    var guetteur = new IntersectionObserver(function(entrees){
+      for (var i = 0; i < entrees.length; i++){
+        if (entrees[i].isIntersecting){
+          entrees[i].target.classList.add('vu');
+          guetteur.unobserve(entrees[i].target);
+        }
+      }
+    }, {rootMargin: '0px 0px -8% 0px', threshold: 0.08});
+    for (var j = 0; j < blocs.length; j++){ guetteur.observe(blocs[j]); }
+  }
 
   /* ----- Ajout au calendrier (.ics) ----- */
   var EVENEMENTS = {
