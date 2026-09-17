@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mariage de Raphaël &amp; Charline — 16/01/2027</title>
+<meta name="description" content="Invitation au mariage de Raphaël et Charline le 16 janvier 2027 : cérémonie civile, cérémonie religieuse, goûter et vin d'honneur.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F5F3EA">
+<meta property="og:title" content="Mariage de Raphaël &amp; Charline">
+<meta property="og:description" content="Ticket pour le 16/01/27 — cérémonie civile, cérémonie religieuse, goûter &amp; vin d'honneur.">
+<meta property="og:type" content="website">
+<style>
+/* ---------- Polices (fichiers locaux, aucune connexion requise) ---------- */
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;
+  src:url('assets/fonts/Poppins-400-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;
+  src:url('assets/fonts/Poppins-400-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;
+  src:url('assets/fonts/Poppins-700-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;
+  src:url('assets/fonts/Poppins-700-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:100 900;font-display:swap;
+  src:url('assets/fonts/HankenGrotesk-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:100 900;font-display:swap;
+  src:url('assets/fonts/HankenGrotesk-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+2C60-2C7F,U+A720-A7FF;}
+
+/* ---------- Couleurs relevées dans le faire-part ---------- */
+:root{
+  --creme:#F5F3EA;
+  --noir:#100F0D;
+  --orange:#FAB54E;
+  --jaune:#FFFDD2;
+  --rose:#E2A7AB;
+  --bordure:3px;
+  --rayon:22px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--creme);
+  color:var(--noir);
+  font-family:'Hanken Grotesk','Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:17px;
+  line-height:1.35;
+  padding:0 16px 56px;
+  overflow-x:hidden;
+}
+.page{max-width:720px;margin:0 auto;}
+
+/* ---------- En-tête ---------- */
+.entete{padding:44px 0 8px;text-align:center;}
+.entete h1{
+  font-family:'Poppins',sans-serif;
+  font-weight:400;
+  font-size:clamp(28px,8.4vw,52px);
+  line-height:1.12;
+  letter-spacing:-.01em;
+  margin:0;
+}
+.entete h1 b{font-weight:700;}
+.script{
+  display:block;
+  width:min(100%,560px);
+  height:auto;
+  margin:6px auto 0;
+}
+.rebours{
+  margin:22px auto 0;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.rebours__case{
+  min-width:64px;
+  border:2px solid var(--noir);
+  border-radius:14px;
+  padding:8px 10px 6px;
+}
+.rebours__valeur{
+  display:block;
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  font-size:26px;
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.rebours__libelle{
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.rebours__fin{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  font-size:20px;
+}
+
+/* ---------- Tickets ---------- */
+.tickets{margin:40px 0 0;display:flex;flex-direction:column;gap:34px;}
+.ticket-bloc{display:block;}
+.ticket{display:flex;align-items:stretch;gap:14px;}
+.ticket__icone{
+  flex:0 0 clamp(120px,34vw,190px);
+  align-self:stretch;
+  border:var(--bordure) solid var(--noir);
+  border-radius:var(--rayon);
+  overflow:hidden;
+  display:flex;
+  background:var(--fond-icone);
+}
+.ticket__icone img{width:100%;height:100%;object-fit:cover;display:block;}
+.ticket--civile{--fond-icone:var(--orange);}
+.ticket--religieuse{--fond-icone:var(--jaune);}
+.ticket--vin{--fond-icone:var(--rose);}
+
+.ticket__corps{
+  position:relative;
+  flex:1 1 auto;
+  min-width:0;
+  display:flex;
+  border:var(--bordure) solid var(--noir);
+  border-radius:var(--rayon);
+  background:var(--creme);
+}
+/* encoche du ticket, comme sur le papier */
+.ticket__corps::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:50%;
+  width:22px;
+  height:44px;
+  transform:translate(50%,-50%);
+  background:var(--creme);
+  border:var(--bordure) solid var(--noir);
+  border-radius:44px 0 0 44px;
+  border-right:0;
+  clip-path:inset(0 50% 0 0);
+}
+.ticket__infos{flex:1 1 auto;min-width:0;padding:16px 14px 14px 18px;}
+.ticket__infos h2{
+  font-family:'Hanken Grotesk',sans-serif;
+  font-weight:700;
+  font-size:clamp(19px,5vw,26px);
+  line-height:1.1;
+  margin:0;
+}
+.tiret{display:block;width:34px;height:3px;background:var(--noir);margin:9px 0;}
+.lieu{font-weight:700;margin:0;font-size:clamp(15px,3.9vw,19px);}
+.adresse{margin:0;font-size:clamp(15px,3.9vw,19px);}
+.ticket__heure{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 14px 12px 10px;
+  border-left:2px dashed var(--noir);
+  margin:12px 0;
+}
+.ticket__heure span{
+  writing-mode:vertical-rl;
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  font-size:clamp(28px,7.6vw,46px);
+  letter-spacing:.01em;
+  line-height:1;
+}
+
+/* ---------- Boutons ---------- */
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.ticket-bloc .actions{margin-top:12px;padding-left:calc(clamp(120px,34vw,190px) + 14px);}
+.bouton{
+  font:inherit;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--noir);
+  background:transparent;
+  border:2px solid var(--noir);
+  border-radius:999px;
+  padding:8px 14px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:background .15s ease,color .15s ease;
+}
+.bouton:hover,.bouton:focus-visible{background:var(--noir);color:var(--creme);}
+.bouton svg{width:14px;height:14px;fill:currentColor;flex:0 0 auto;}
+
+/* ---------- Conditions ---------- */
+.conditions{margin:56px 0 0;}
+.conditions h2{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  font-size:clamp(24px,6.4vw,41px);
+  text-align:center;
+  margin:0 0 22px;
+}
+.conditions ol{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(15px,4vw,19px);
+  line-height:1.4;
+  margin:0;
+  padding-left:1.2em;
+}
+.conditions li{margin-bottom:14px;}
+.merci{
+  font-family:'Poppins',sans-serif;
+  text-align:center;
+  font-size:clamp(15px,4vw,19px);
+  margin:30px 0 0;
+}
+.signature{display:block;width:min(74%,300px);height:auto;margin:14px 0 0 auto;}
+
+/* ---------- Impression ---------- */
+@media print{
+  body{background:#fff;padding:0;}
+  .bouton,.rebours{display:none !important;}
+  .ticket-bloc,.ticket,.conditions{break-inside:avoid;}
+  .entete{padding-top:0;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .ticket-bloc{animation:apparait .6s ease both;}
+  .ticket-bloc:nth-child(2){animation-delay:.09s;}
+  .ticket-bloc:nth-child(3){animation-delay:.18s;}
+  @keyframes apparait{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+}
+@media (max-width:420px){
+  .ticket-bloc .actions{padding-left:0;}
+  .ticket{gap:10px;}
+  .ticket__infos{padding:13px 8px 12px 13px;}
+  .ticket__heure{padding:10px 8px;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="entete">
+    <h1><b>MARIAGE</b> DE<br><b>RAPHAËL</b> &amp; <b>CHARLINE</b></h1>
+    <img class="script" src="assets/script-ticket-pour-le.svg" alt="Ticket pour le 16/01/27">
+    <div class="rebours" id="rebours"></div>
+  </header>
+
+  <main class="tickets">
+
+    <article class="ticket-bloc">
+      <div class="ticket ticket--civile">
+      <div class="ticket__icone"><img src="assets/icone-alliances.svg" alt="" aria-hidden="true"></div>
+      <div class="ticket__corps">
+        <div class="ticket__infos">
+          <h2>Cérémonie Civile</h2>
+          <span class="tiret"></span>
+          <p class="lieu">Mairie de Nohant</p>
+          <p class="adresse">Place de l’église<br>18390<br>NOHANT-EN-GOÛT</p>
+        </div>
+        <div class="ticket__heure"><span>11H30</span></div>
+      </div>
+      </div>
+      <div class="actions">
+            <a class="bouton" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&amp;query=Mairie%20de%20Nohant%2C%20Place%20de%20l%27%C3%A9glise%2C%2018390%20Nohant-en-Go%C3%BBt">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+              Itinéraire</a>
+            <button class="bouton" type="button" title="Ajouter au calendrier" data-agenda="civile">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm12 8v10H5V10h14Z"/></svg>
+              Calendrier</button>
+          </div>
+    </article>
+
+    <article class="ticket-bloc">
+      <div class="ticket ticket--religieuse">
+      <div class="ticket__icone"><img src="assets/icone-coeurs.svg" alt="" aria-hidden="true"></div>
+      <div class="ticket__corps">
+        <div class="ticket__infos">
+          <h2>Cérémonie<br>Religieuse</h2>
+          <span class="tiret"></span>
+          <p class="lieu">Salle du Royaume</p>
+          <p class="adresse">111 Avenue du<br>Générale de Gaulle<br>18000 BOURGES</p>
+        </div>
+        <div class="ticket__heure"><span>13H30</span></div>
+      </div>
+      </div>
+      <div class="actions">
+            <a class="bouton" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&amp;query=Salle%20du%20Royaume%2C%20111%20Avenue%20du%20G%C3%A9n%C3%A9ral%20de%20Gaulle%2C%2018000%20Bourges">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+              Itinéraire</a>
+            <button class="bouton" type="button" title="Ajouter au calendrier" data-agenda="religieuse">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm12 8v10H5V10h14Z"/></svg>
+              Calendrier</button>
+          </div>
+    </article>
+
+    <article class="ticket-bloc">
+      <div class="ticket ticket--vin">
+      <div class="ticket__icone"><img src="assets/icone-coupes.svg" alt="" aria-hidden="true"></div>
+      <div class="ticket__corps">
+        <div class="ticket__infos">
+          <h2>Goûter &amp;<br>Vin d’honneur</h2>
+          <span class="tiret"></span>
+          <p class="lieu">Salle des fêtes</p>
+          <p class="adresse">23 rue de la mairie<br>18510<br>MENETOU-SALON</p>
+        </div>
+        <div class="ticket__heure"><span>15-18H</span></div>
+      </div>
+      </div>
+      <div class="actions">
+            <a class="bouton" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&amp;query=Salle%20des%20f%C3%AAtes%2C%2023%20rue%20de%20la%20mairie%2C%2018510%20Menetou-Salon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+              Itinéraire</a>
+            <button class="bouton" type="button" title="Ajouter au calendrier" data-agenda="vin">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm12 8v10H5V10h14Z"/></svg>
+              Calendrier</button>
+          </div>
+    </article>
+
+  </main>
+
+  <section class="conditions">
+    <h2>CONDITIONS GÉNÉRALES</h2>
+    <ol>
+      <li>Veuillez donner une <b>réponse</b> avant le <b>vendredi 16 octobre 2026</b>. Sans retour de votre nous considérerons que vous ne serais pas parmis nous.</li>
+      <li>Aucun animal ne sera autorisé.</li>
+      <li>Venez avec votre bonne humeur. Préparez-vous afin de participer à plusieurs activités, nous comptons sur vous pour jouer le jeu.</li>
+      <li>Aucune des deux cérémonies est obligatoires par ailleurs nous vous demandons de respecter nos choix.</li>
+      <li>Si vous souhaitez être dans le thème. Nous vous conseillons de porter du rose, du orange, du jaune ou encore du vert. Par ailleurs ne vous y sentez pas obliger, cela reste votre choix.</li>
+    </ol>
+    <p class="merci">Merci de votre compréhension.</p>
+    <img class="signature" src="assets/signature.svg" alt="Charline et Raphaël">
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ----- Compte a rebours jusqu'a la ceremonie civile ----- */
+  var DEPART = new Date(2027, 0, 16, 11, 30, 0);
+  var zone = document.getElementById('rebours');
+  var libelles = [['jour','jours'],['heure','heures'],['minute','minutes'],['seconde','secondes']];
+
+  function afficher(){
+    var reste = DEPART - new Date();
+    if (reste <= 0){
+      zone.innerHTML = '<p class="rebours__fin">C’est aujourd’hui !</p>';
+      return;
+    }
+    var s = Math.floor(reste / 1000);
+    var v = [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60];
+    var html = '';
+    for (var i = 0; i < 4; i++){
+      var mot = libelles[i][v[i] > 1 ? 1 : 0];
+      html += '<div class="rebours__case"><span class="rebours__valeur">' + v[i] +
+              '</span><span class="rebours__libelle">' + mot + '</span></div>';
+    }
+    zone.innerHTML = html;
+  }
+  afficher();
+  setInterval(afficher, 1000);
+
+  /* ----- Ajout au calendrier (.ics) ----- */
+  var EVENEMENTS = {
+    civile:{
+      titre:'Cérémonie civile — Mariage de Raphaël & Charline',
+      lieu:'Mairie de Nohant, Place de l’église, 18390 Nohant-en-Goût',
+      debut:[2027,1,16,11,30], fin:[2027,1,16,12,30]
+    },
+    religieuse:{
+      titre:'Cérémonie religieuse — Mariage de Raphaël & Charline',
+      lieu:'Salle du Royaume, 111 Avenue du Générale de Gaulle, 18000 Bourges',
+      debut:[2027,1,16,13,30], fin:[2027,1,16,15,0]
+    },
+    vin:{
+      titre:'Goûter & vin d’honneur — Mariage de Raphaël & Charline',
+      lieu:'Salle des fêtes, 23 rue de la mairie, 18510 Menetou-Salon',
+      debut:[2027,1,16,15,0], fin:[2027,1,16,18,0]
+    }
+  };
+
+  function deuxChiffres(n){ return (n < 10 ? '0' : '') + n; }
+  function horodatage(t){
+    return t[0] + deuxChiffres(t[1]) + deuxChiffres(t[2]) + 'T' +
+           deuxChiffres(t[3]) + deuxChiffres(t[4]) + '00';
+  }
+  function echappe(txt){
+    return String(txt).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
+  }
+
+  /* Le fuseau Europe/Paris est decrit dans le fichier pour que l'heure
+     reste juste quel que soit le telephone de l'invite. */
+  var FUSEAU = [
+    'BEGIN:VTIMEZONE',
+    'TZID:Europe/Paris',
+    'BEGIN:STANDARD',
+    'DTSTART:19701025T030000',
+    'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+    'TZOFFSETFROM:+0200',
+    'TZOFFSETTO:+0100',
+    'TZNAME:CET',
+    'END:STANDARD',
+    'BEGIN:DAYLIGHT',
+    'DTSTART:19700329T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0200',
+    'TZNAME:CEST',
+    'END:DAYLIGHT',
+    'END:VTIMEZONE'
+  ];
+
+  function fabriqueIcs(cle){
+    var e = EVENEMENTS[cle];
+    var lignes = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Mariage Raphael et Charline//FR','CALSCALE:GREGORIAN','METHOD:PUBLISH']
+      .concat(FUSEAU)
+      .concat([
+        'BEGIN:VEVENT',
+        'UID:' + cle + '-16012027@mariage-raphael-charline',
+        'DTSTAMP:20260917T120000Z',
+        'DTSTART;TZID=Europe/Paris:' + horodatage(e.debut),
+        'DTEND;TZID=Europe/Paris:' + horodatage(e.fin),
+        'SUMMARY:' + echappe(e.titre),
+        'LOCATION:' + echappe(e.lieu),
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ]);
+    return lignes.join('\r\n');
+  }
+
+  function telecharge(cle){
+    var fichier = new Blob([fabriqueIcs(cle)], {type:'text/calendar;charset=utf-8'});
+    var url = URL.createObjectURL(fichier);
+    var lien = document.createElement('a');
+    lien.href = url;
+    lien.download = 'mariage-' + cle + '-16-01-2027.ics';
+    document.body.appendChild(lien);
+    lien.click();
+    document.body.removeChild(lien);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  }
+
+  var boutons = document.querySelectorAll('[data-agenda]');
+  for (var i = 0; i < boutons.length; i++){
+    boutons[i].addEventListener('click', function(){
+      telecharge(this.getAttribute('data-agenda'));
+    });
+  }
+})();
+</script>
+</body>
+</html>
