@@ -201,6 +201,34 @@ body{
 }
 .bouton:hover,.bouton:focus-visible{background:var(--noir);color:var(--creme);}
 .bouton svg{width:14px;height:14px;fill:currentColor;flex:0 0 auto;}
+/* Reflet qui traverse l'interieur du bouton : un mouvement lent et peu
+   contraste attire l'oeil en vision peripherique sans gener la lecture.
+   Les deux boutons sont decales pour eviter le clignotement synchrone,
+   et le reflet s'efface des que le bouton est survole ou au clavier. */
+.bouton{position:relative;overflow:hidden;isolation:isolate;}
+.bouton::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  transform:translateX(-130%);
+  background:linear-gradient(105deg,
+    transparent 32%,
+    rgba(16,15,13,.16) 47%,
+    rgba(16,15,13,.05) 56%,
+    transparent 70%);
+}
+@media (prefers-reduced-motion:no-preference){
+  .bouton::after{animation:reflet 5.2s cubic-bezier(.45,0,.2,1) infinite;}
+  .bouton + .bouton::after{animation-delay:1.7s;}
+  .bouton:hover::after,.bouton:focus-visible::after{animation-play-state:paused;opacity:0;}
+  @keyframes reflet{
+    0%{transform:translateX(-130%);}
+    34%,100%{transform:translateX(130%);}
+  }
+}
+.bouton:active{transform:translateY(1px);}
 
 /* ---------- Conditions ---------- */
 .conditions{margin:56px 0 0;}
