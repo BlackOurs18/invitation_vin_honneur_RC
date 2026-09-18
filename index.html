@@ -10,6 +10,7 @@
 <meta property="og:title" content="Mariage de Raphaël &amp; Charline">
 <meta property="og:description" content="Ticket pour le 16/01/27 — cérémonie civile, cérémonie religieuse, goûter &amp; vin d'honneur.">
 <meta property="og:type" content="website">
+<script>document.documentElement.className += ' js accueil-ouvert';</script>
 <style>
 /* ---------- Polices (fichiers locaux, aucune connexion requise) ---------- */
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;
@@ -42,7 +43,7 @@
   --rayon:22px;
 }
 *{box-sizing:border-box;}
-html{-webkit-text-size-adjust:100%;}
+html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable;}
 body{
   margin:0;
   background:var(--creme);
@@ -56,19 +57,8 @@ body{
 .page{max-width:720px;margin:0 auto;}
 
 /* ---------- En-tête ---------- */
-/* Ecran d'accueil : l'en-tete occupe tout l'ecran a l'ouverture */
-.entete{
-  position:relative;
-  min-height:100vh;
-  min-height:100svh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:44px 0 104px;
-  text-align:center;
-}
-.entete h1{
+.entete{padding:44px 0 8px;text-align:center;}
+.entete h1,.entete .titre{
   font-family:'Poppins',sans-serif;
   font-weight:400;
   font-size:clamp(28px,8.4vw,52px);
@@ -76,7 +66,7 @@ body{
   letter-spacing:-.01em;
   margin:0;
 }
-.entete h1 b{font-weight:700;}
+.entete h1 b,.entete .titre b{font-weight:700;}
 .script{
   display:block;
   width:min(100%,560px);
@@ -124,12 +114,40 @@ body{
   font-size:20px;
 }
 
-/* Invitation a glisser vers le bas, en pied d'ecran d'accueil */
+/* ---------- Ecran d'accueil ----------
+   Un panneau plein ecran pose par-dessus la page, qui ne bouge pas.
+   Au premier geste (glisser, molette, fleche, clavier) le panneau
+   remonte doucement et devoile l'invitation. Sans JavaScript, il n'est
+   jamais affiche. */
+.accueil{display:none;}
+.js .accueil{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:24px 16px 120px;
+  background:var(--creme);
+  touch-action:none;
+  transition:transform 1.5s cubic-bezier(.65,0,.35,1),box-shadow 1.5s ease;
+}
+.accueil .entete{width:100%;max-width:720px;margin:0 auto;padding:0;}
+.accueil__contenu{transition:opacity 1s ease,transform 1.5s cubic-bezier(.65,0,.35,1);}
+.accueil.est-parti{transform:translateY(-100%);box-shadow:0 24px 60px rgba(16,15,13,.16);}
+.accueil.est-parti .accueil__contenu{opacity:0;transform:translateY(-8vh);}
+.accueil.est-range{visibility:hidden;}
+.accueil-ouvert,.accueil-ouvert body{overflow:hidden;}
 .glisser{
   position:absolute;
   left:50%;
-  bottom:max(22px,env(safe-area-inset-bottom));
+  bottom:max(26px,env(safe-area-inset-bottom));
   transform:translateX(-50%);
+  font:inherit;
+  background:none;
+  border:0;
+  padding:0;
+  cursor:pointer;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -152,8 +170,11 @@ body{
 }
 .glisser svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
 .glisser.est-cache{opacity:0;pointer-events:none;}
+@media (prefers-reduced-motion:reduce){
+  .js .accueil,.accueil__contenu{transition:opacity .4s ease;}
+  .accueil.est-parti{transform:none;opacity:0;box-shadow:none;}
+}
 @media (prefers-reduced-motion:no-preference){
-  html{scroll-behavior:smooth;}
   .glisser__fleche{animation:glisse 1.8s ease-in-out infinite;}
   @keyframes glisse{
     0%,100%{transform:translateY(0);}
@@ -319,12 +340,13 @@ body{
   body{background:#fff;padding:0;}
   .bouton,.rebours,.glisser{display:none !important;}
   .ticket-bloc,.ticket,.conditions{break-inside:avoid;}
-  .entete{padding-top:0;min-height:0;}
+  .entete{padding-top:0;}
+  .accueil{display:none !important;}
 }
 @media (prefers-reduced-motion:no-preference){
   .ticket-bloc{animation:apparait .6s ease both;}
-  /* les tickets sont sous l'ecran d'accueil : ils apparaissent quand on y arrive */
-  .js-apparition .tickets:not(.est-visible) .ticket-bloc{animation-play-state:paused;}
+  /* les tickets apparaissent quand l'ecran d'accueil se leve */
+  .js .tickets:not(.est-visible) .ticket-bloc{animation-play-state:paused;}
   .ticket-bloc:nth-child(2){animation-delay:.09s;}
   .ticket-bloc:nth-child(3){animation-delay:.18s;}
   @keyframes apparait{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
@@ -338,19 +360,27 @@ body{
 </style>
 </head>
 <body>
+<div class="accueil" id="accueil">
+  <div class="accueil__contenu entete">
+    <p class="titre"><b>MARIAGE</b> DE<br><b>RAPHAËL</b> &amp; <b>CHARLINE</b></p>
+    <img class="script" src="assets/script-ticket-pour-le.svg" alt="Ticket pour le 16/01/27">
+    <div class="rebours"></div>
+  </div>
+  <button class="glisser" type="button" id="glisser">
+    Glisser
+    <span class="glisser__fleche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+  </button>
+</div>
+
 <div class="page">
 
   <header class="entete">
     <h1><b>MARIAGE</b> DE<br><b>RAPHAËL</b> &amp; <b>CHARLINE</b></h1>
     <img class="script" src="assets/script-ticket-pour-le.svg" alt="Ticket pour le 16/01/27">
     <div class="rebours" id="rebours"></div>
-    <a class="glisser" href="#suite" aria-label="Glisser vers le bas">
-      Glisser
-      <span class="glisser__fleche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
-    </a>
   </header>
 
-  <main class="tickets" id="suite">
+  <main class="tickets">
 
     <article class="ticket-bloc">
       <div class="ticket ticket--civile">
@@ -453,13 +483,13 @@ body{
 
   /* ----- Compte a rebours jusqu'a la ceremonie civile ----- */
   var DEPART = new Date(2027, 0, 16, 11, 30, 0);
-  var zone = document.getElementById('rebours');
+  var zones = document.querySelectorAll('.rebours');
   var libelles = [['jour','jours'],['heure','heures'],['minute','minutes'],['seconde','secondes']];
 
   function afficher(){
     var reste = DEPART - new Date();
     if (reste <= 0){
-      zone.innerHTML = '<p class="rebours__fin">C’est aujourd’hui !</p>';
+      remplir('<p class="rebours__fin">C’est aujourd’hui !</p>');
       return;
     }
     var s = Math.floor(reste / 1000);
@@ -470,29 +500,43 @@ body{
       html += '<div class="rebours__case"><span class="rebours__valeur">' + v[i] +
               '</span><span class="rebours__libelle">' + mot + '</span></div>';
     }
-    zone.innerHTML = html;
+    remplir(html);
+  }
+  function remplir(html){
+    for (var j = 0; j < zones.length; j++) zones[j].innerHTML = html;
   }
   afficher();
   setInterval(afficher, 1000);
 
-  /* ----- Ecran d'accueil : la fleche s'efface des qu'on fait defiler ----- */
-  var glisser = document.querySelector('.glisser');
-  function majGlisser(){ glisser.classList.toggle('est-cache', window.scrollY > 40); }
-  window.addEventListener('scroll', majGlisser, {passive:true});
-  majGlisser();
-
-  /* ----- Les tickets apparaissent quand ils arrivent a l'ecran ----- */
+  /* ----- Ecran d'accueil : au premier geste, il remonte et devoile la page ----- */
+  var accueil = document.getElementById('accueil');
   var tickets = document.querySelector('.tickets');
-  if ('IntersectionObserver' in window){
-    document.documentElement.classList.add('js-apparition');
-    var guetteur = new IntersectionObserver(function(entrees){
-      if (entrees[0].isIntersecting){
-        tickets.classList.add('est-visible');
-        guetteur.disconnect();
-      }
-    }, {threshold:0.08});
-    guetteur.observe(tickets);
+  var racine = document.documentElement;
+  var parti = false;
+  var departTouche = null;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
+  function lever(){
+    if (parti) return;
+    parti = true;
+    accueil.classList.add('est-parti');
+    racine.classList.remove('accueil-ouvert');
+    setTimeout(function(){ tickets.classList.add('est-visible'); }, 450);
+    setTimeout(function(){ accueil.classList.add('est-range'); }, 1600);
   }
+  document.getElementById('glisser').addEventListener('click', lever);
+  accueil.addEventListener('wheel', function(e){ if (e.deltaY > 0) lever(); }, {passive:true});
+  accueil.addEventListener('touchstart', function(e){ departTouche = e.touches[0].clientY; }, {passive:true});
+  accueil.addEventListener('touchmove', function(e){
+    if (departTouche !== null && departTouche - e.touches[0].clientY > 30) lever();
+  }, {passive:true});
+  document.addEventListener('keydown', function(e){
+    if (!parti && /^(ArrowDown|PageDown|Enter| |Spacebar)$/.test(e.key)){
+      e.preventDefault();
+      lever();
+    }
+  });
 
   /* ----- Bouton de reponse : sans lien renseigne, il ne mene nulle part ----- */
   var reponse = document.getElementById('bouton-reponse');
