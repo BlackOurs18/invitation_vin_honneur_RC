@@ -203,8 +203,10 @@ body{
 .bouton svg{width:14px;height:14px;fill:currentColor;flex:0 0 auto;}
 /* Reflet qui traverse l'interieur du bouton : un mouvement lent et peu
    contraste attire l'oeil en vision peripherique sans gener la lecture.
-   Les deux boutons sont decales pour eviter le clignotement synchrone,
-   et le reflet s'efface des que le bouton est survole ou au clavier. */
+   Les boutons passent par paires, un evenement apres l'autre (civile,
+   religieuse, gouter) : chaque paire demarre avant la fin de la
+   precedente pour garder le mouvement continu, sans longue attente.
+   Le reflet s'efface des que le bouton est survole ou au clavier. */
 .bouton{position:relative;overflow:hidden;isolation:isolate;}
 .bouton::after{
   content:"";
@@ -220,12 +222,13 @@ body{
     transparent 70%);
 }
 @media (prefers-reduced-motion:no-preference){
-  .bouton::after{animation:reflet 5.2s cubic-bezier(.45,0,.2,1) infinite;}
-  .bouton + .bouton::after{animation-delay:1.7s;}
+  .bouton::after{animation:reflet 8s cubic-bezier(.45,0,.2,1) infinite;}
+  .ticket-bloc:nth-child(2) .bouton::after{animation-delay:2s;}
+  .ticket-bloc:nth-child(3) .bouton::after{animation-delay:4s;}
   .bouton:hover::after,.bouton:focus-visible::after{animation-play-state:paused;opacity:0;}
   @keyframes reflet{
     0%{transform:translateX(-130%);}
-    34%,100%{transform:translateX(130%);}
+    43.75%,100%{transform:translateX(130%);}
   }
 }
 .bouton:active{transform:translateY(1px);}
@@ -367,7 +370,7 @@ body{
       <li>Veuillez donner une <b>réponse</b> avant le <b>vendredi 16 octobre 2026</b>. Sans retour de votre nous considérerons que vous ne serais pas parmis nous.</li>
       <li>Aucun animal ne sera autorisé.</li>
       <li>Venez avec votre bonne humeur. Préparez-vous afin de participer à plusieurs activités, nous comptons sur vous pour jouer le jeu.</li>
-      <li>Aucune des deux cérémonies est obligatoires par ailleurs nous vous demandons de respecter nos choix.</li>
+      <li>Aucune des deux cérémonies est obligatoires par ailleurs nous vous demandons de respecter nos choix et convictions.</li>
       <li>Si vous souhaitez être dans le thème. Nous vous conseillons de porter du rose, du orange, du jaune ou encore du vert. Par ailleurs ne vous y sentez pas obliger, cela reste votre choix.</li>
     </ol>
     <p class="merci">Merci de votre compréhension.</p>
