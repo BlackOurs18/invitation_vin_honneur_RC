@@ -56,7 +56,18 @@ body{
 .page{max-width:720px;margin:0 auto;}
 
 /* ---------- En-tête ---------- */
-.entete{padding:44px 0 8px;text-align:center;}
+/* Ecran d'accueil : l'en-tete occupe tout l'ecran a l'ouverture */
+.entete{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:44px 0 104px;
+  text-align:center;
+}
 .entete h1{
   font-family:'Poppins',sans-serif;
   font-weight:400;
@@ -72,39 +83,82 @@ body{
   height:auto;
   margin:6px auto 0;
 }
+/* Le decompte reste toujours sur une seule ligne : les cases se
+   partagent la largeur et le texte retrecit sur les petits ecrans. */
 .rebours{
   margin:22px auto 0;
   display:flex;
   justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
+  gap:clamp(5px,2vw,10px);
+  width:100%;
+  max-width:400px;
 }
 .rebours__case{
-  min-width:64px;
+  flex:1 1 0;
+  min-width:0;
   border:2px solid var(--noir);
   border-radius:14px;
-  padding:8px 10px 6px;
+  padding:8px 2px 6px;
 }
 .rebours__valeur{
   display:block;
   font-family:'Poppins',sans-serif;
   font-weight:700;
-  font-size:26px;
+  font-size:clamp(20px,6.6vw,26px);
   line-height:1;
   font-variant-numeric:tabular-nums;
 }
 .rebours__libelle{
   display:block;
   margin-top:4px;
-  font-size:11px;
-  letter-spacing:.14em;
+  font-size:clamp(8px,2.5vw,11px);
+  letter-spacing:clamp(.4px,.35vw,1.5px);
   text-transform:uppercase;
+  white-space:nowrap;
 }
 .rebours__fin{
   margin:0;
   font-family:'Poppins',sans-serif;
   font-weight:700;
   font-size:20px;
+}
+
+/* Invitation a glisser vers le bas, en pied d'ecran d'accueil */
+.glisser{
+  position:absolute;
+  left:50%;
+  bottom:max(22px,env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  color:var(--noir);
+  text-decoration:none;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  transition:opacity .4s ease;
+}
+.glisser__fleche{
+  width:38px;
+  height:38px;
+  border:2px solid var(--noir);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+}
+.glisser svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.glisser.est-cache{opacity:0;pointer-events:none;}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth;}
+  .glisser__fleche{animation:glisse 1.8s ease-in-out infinite;}
+  @keyframes glisse{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(8px);}
+  }
 }
 
 /* ---------- Tickets ---------- */
@@ -232,6 +286,8 @@ body{
   }
 }
 .bouton:active{transform:translateY(1px);}
+.actions--centre{justify-content:center;}
+.conditions .actions--centre{margin:4px 0 0;}
 
 /* ---------- Conditions ---------- */
 .conditions{margin:56px 0 0;}
@@ -261,12 +317,14 @@ body{
 /* ---------- Impression ---------- */
 @media print{
   body{background:#fff;padding:0;}
-  .bouton,.rebours{display:none !important;}
+  .bouton,.rebours,.glisser{display:none !important;}
   .ticket-bloc,.ticket,.conditions{break-inside:avoid;}
-  .entete{padding-top:0;}
+  .entete{padding-top:0;min-height:0;}
 }
 @media (prefers-reduced-motion:no-preference){
   .ticket-bloc{animation:apparait .6s ease both;}
+  /* les tickets sont sous l'ecran d'accueil : ils apparaissent quand on y arrive */
+  .js-apparition .tickets:not(.est-visible) .ticket-bloc{animation-play-state:paused;}
   .ticket-bloc:nth-child(2){animation-delay:.09s;}
   .ticket-bloc:nth-child(3){animation-delay:.18s;}
   @keyframes apparait{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
@@ -286,9 +344,13 @@ body{
     <h1><b>MARIAGE</b> DE<br><b>RAPHAËL</b> &amp; <b>CHARLINE</b></h1>
     <img class="script" src="assets/script-ticket-pour-le.svg" alt="Ticket pour le 16/01/27">
     <div class="rebours" id="rebours"></div>
+    <a class="glisser" href="#suite" aria-label="Glisser vers le bas">
+      Glisser
+      <span class="glisser__fleche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+    </a>
   </header>
 
-  <main class="tickets">
+  <main class="tickets" id="suite">
 
     <article class="ticket-bloc">
       <div class="ticket ticket--civile">
@@ -373,6 +435,12 @@ body{
       <li>Aucune des deux cérémonies est obligatoires par ailleurs nous vous demandons de respecter nos choix et convictions.</li>
       <li>Si vous souhaitez être dans le thème. Nous vous conseillons de porter du rose, du orange, du jaune ou encore du vert. Par ailleurs ne vous y sentez pas obliger, cela reste votre choix.</li>
     </ol>
+    <div class="actions actions--centre">
+      <!-- LIEN DU GOOGLE FORM : remplacer href="#" par le lien du formulaire -->
+      <a class="bouton" id="bouton-reponse" target="_blank" rel="noopener" href="#">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 4.24V18h16V8.24l-8 5-8-5ZM19.1 6H4.9L12 10.44 19.1 6Z"/></svg>
+        Répondre à l’invitation</a>
+    </div>
     <p class="merci">Merci de votre compréhension.</p>
     <img class="signature" src="assets/signature.svg" alt="Charline et Raphaël">
   </section>
@@ -406,6 +474,31 @@ body{
   }
   afficher();
   setInterval(afficher, 1000);
+
+  /* ----- Ecran d'accueil : la fleche s'efface des qu'on fait defiler ----- */
+  var glisser = document.querySelector('.glisser');
+  function majGlisser(){ glisser.classList.toggle('est-cache', window.scrollY > 40); }
+  window.addEventListener('scroll', majGlisser, {passive:true});
+  majGlisser();
+
+  /* ----- Les tickets apparaissent quand ils arrivent a l'ecran ----- */
+  var tickets = document.querySelector('.tickets');
+  if ('IntersectionObserver' in window){
+    document.documentElement.classList.add('js-apparition');
+    var guetteur = new IntersectionObserver(function(entrees){
+      if (entrees[0].isIntersecting){
+        tickets.classList.add('est-visible');
+        guetteur.disconnect();
+      }
+    }, {threshold:0.08});
+    guetteur.observe(tickets);
+  }
+
+  /* ----- Bouton de reponse : sans lien renseigne, il ne mene nulle part ----- */
+  var reponse = document.getElementById('bouton-reponse');
+  reponse.addEventListener('click', function(e){
+    if (reponse.getAttribute('href') === '#') e.preventDefault();
+  });
 
   /* ----- Ajout au calendrier (.ics) ----- */
   var EVENEMENTS = {
