@@ -138,6 +138,29 @@ body{
 .accueil.est-parti .accueil__contenu{opacity:0;transform:translateY(-8vh);}
 .accueil.est-range{visibility:hidden;}
 .accueil-ouvert,.accueil-ouvert body{overflow:hidden;}
+/* Boules disco : rangees juste sous l'ecran d'accueil, elles montent avec
+   lui puis le depassent, chacune a sa vitesse, et sortent par le haut. */
+.disco{position:absolute;left:0;right:0;top:100%;height:70vh;pointer-events:none;}
+.disco__boule,.disco__eclat{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+  width:var(--t);
+  height:var(--t);
+  transition:transform var(--d) cubic-bezier(.45,0,.3,1) var(--r);
+}
+.disco__boule{filter:drop-shadow(0 8px 10px rgba(16,15,13,.18));}
+.disco__eclat{fill:var(--orange);}
+.disco__eclat:nth-of-type(even){fill:var(--rose);}
+.accueil.est-parti .disco__boule{transform:translateY(calc(-70vh - 100%)) rotate(var(--rot));}
+.accueil.est-parti .disco__eclat{transform:translateY(calc(-70vh - 100%)) rotate(180deg);}
+@media (prefers-reduced-motion:no-preference){
+  .accueil.est-parti .disco__eclat use{animation:scintille .5s ease-in-out infinite alternate;transform-origin:center;transform-box:fill-box;}
+  @keyframes scintille{from{opacity:1;}to{opacity:.25;}}
+}
+@media (prefers-reduced-motion:reduce){
+  .disco{display:none;}
+}
 .glisser{
   position:absolute;
   left:50%;
@@ -365,6 +388,27 @@ body{
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="disco-ombre" cx="36%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#100F0D" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#100F0D" stop-opacity=".55"/>
+    </radialGradient>
+    <clipPath id="disco-cercle"><circle cx="50" cy="50" r="46"/></clipPath>
+    <symbol id="boule-disco" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="#57544D"/>
+      <g clip-path="url(#disco-cercle)"><rect x="37.4" y="4.4" width="5.7" height="1.1" fill="#FFFFFF"/><rect x="43.9" y="4.4" width="5.7" height="1.1" fill="#DCDAD3"/><rect x="50.4" y="4.4" width="5.7" height="1.1" fill="#F1F0EC"/><rect x="56.9" y="4.4" width="5.7" height="1.1" fill="#DCDAD3"/><rect x="25.5" y="6.3" width="9.1" height="4.6" fill="#C3C1B9"/><rect x="35.5" y="6.3" width="9.1" height="4.6" fill="#F1F0EC"/><rect x="45.4" y="6.3" width="9.1" height="4.6" fill="#DCDAD3"/><rect x="55.4" y="6.3" width="9.1" height="4.6" fill="#C3C1B9"/><rect x="65.3" y="6.3" width="9.1" height="4.6" fill="#E2A7AB"/><rect x="15.6" y="11.7" width="7.9" height="7.8" fill="#DCDAD3"/><rect x="24.3" y="11.7" width="7.9" height="7.8" fill="#C3C1B9"/><rect x="33.0" y="11.7" width="7.9" height="7.8" fill="#FFFFFF"/><rect x="41.7" y="11.7" width="7.9" height="7.8" fill="#C3C1B9"/><rect x="50.4" y="11.7" width="7.9" height="7.8" fill="#DCDAD3"/><rect x="59.1" y="11.7" width="7.9" height="7.8" fill="#DCDAD3"/><rect x="67.8" y="11.7" width="7.9" height="7.8" fill="#C3C1B9"/><rect x="76.5" y="11.7" width="7.9" height="7.8" fill="#FFFDD2"/><rect x="8.6" y="20.3" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="17.9" y="20.3" width="8.5" height="10.2" fill="#DCDAD3"/><rect x="27.2" y="20.3" width="8.5" height="10.2" fill="#A9A69D"/><rect x="36.5" y="20.3" width="8.5" height="10.2" fill="#DCDAD3"/><rect x="45.8" y="20.3" width="8.5" height="10.2" fill="#DCDAD3"/><rect x="55.0" y="20.3" width="8.5" height="10.2" fill="#8C8980"/><rect x="64.3" y="20.3" width="8.5" height="10.2" fill="#FFFFFF"/><rect x="73.6" y="20.3" width="8.5" height="10.2" fill="#A9A69D"/><rect x="82.9" y="20.3" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="4.9" y="31.3" width="8.3" height="11.8" fill="#DCDAD3"/><rect x="14.0" y="31.3" width="8.3" height="11.8" fill="#C3C1B9"/><rect x="23.1" y="31.3" width="8.3" height="11.8" fill="#F1F0EC"/><rect x="32.2" y="31.3" width="8.3" height="11.8" fill="#A9A69D"/><rect x="41.3" y="31.3" width="8.3" height="11.8" fill="#C3C1B9"/><rect x="50.4" y="31.3" width="8.3" height="11.8" fill="#C3C1B9"/><rect x="59.5" y="31.3" width="8.3" height="11.8" fill="#F1F0EC"/><rect x="68.6" y="31.3" width="8.3" height="11.8" fill="#DCDAD3"/><rect x="77.7" y="31.3" width="8.3" height="11.8" fill="#FFFFFF"/><rect x="86.8" y="31.3" width="8.3" height="11.8" fill="#FFFFFF"/><rect x="4.9" y="43.9" width="8.3" height="12.3" fill="#C3C1B9"/><rect x="14.0" y="43.9" width="8.3" height="12.3" fill="#DCDAD3"/><rect x="23.1" y="43.9" width="8.3" height="12.3" fill="#C3C1B9"/><rect x="32.2" y="43.9" width="8.3" height="12.3" fill="#FFFFFF"/><rect x="41.3" y="43.9" width="8.3" height="12.3" fill="#FFFFFF"/><rect x="50.4" y="43.9" width="8.3" height="12.3" fill="#F1F0EC"/><rect x="59.5" y="43.9" width="8.3" height="12.3" fill="#FFFFFF"/><rect x="68.6" y="43.9" width="8.3" height="12.3" fill="#8C8980"/><rect x="77.7" y="43.9" width="8.3" height="12.3" fill="#A9A69D"/><rect x="86.8" y="43.9" width="8.3" height="12.3" fill="#E2A7AB"/><rect x="4.9" y="56.9" width="8.3" height="11.8" fill="#DCDAD3"/><rect x="14.0" y="56.9" width="8.3" height="11.8" fill="#DCDAD3"/><rect x="23.1" y="56.9" width="8.3" height="11.8" fill="#FFFFFF"/><rect x="32.2" y="56.9" width="8.3" height="11.8" fill="#FFFFFF"/><rect x="41.3" y="56.9" width="8.3" height="11.8" fill="#A9A69D"/><rect x="50.4" y="56.9" width="8.3" height="11.8" fill="#C3C1B9"/><rect x="59.5" y="56.9" width="8.3" height="11.8" fill="#F1F0EC"/><rect x="68.6" y="56.9" width="8.3" height="11.8" fill="#A9A69D"/><rect x="77.7" y="56.9" width="8.3" height="11.8" fill="#FFFFFF"/><rect x="86.8" y="56.9" width="8.3" height="11.8" fill="#DCDAD3"/><rect x="8.6" y="69.5" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="17.9" y="69.5" width="8.5" height="10.2" fill="#DCDAD3"/><rect x="27.2" y="69.5" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="36.5" y="69.5" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="45.8" y="69.5" width="8.5" height="10.2" fill="#FFFFFF"/><rect x="55.0" y="69.5" width="8.5" height="10.2" fill="#FFFFFF"/><rect x="64.3" y="69.5" width="8.5" height="10.2" fill="#DCDAD3"/><rect x="73.6" y="69.5" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="82.9" y="69.5" width="8.5" height="10.2" fill="#F1F0EC"/><rect x="15.6" y="80.5" width="7.9" height="7.8" fill="#FFFFFF"/><rect x="24.3" y="80.5" width="7.9" height="7.8" fill="#F1F0EC"/><rect x="33.0" y="80.5" width="7.9" height="7.8" fill="#DCDAD3"/><rect x="41.7" y="80.5" width="7.9" height="7.8" fill="#FFFFFF"/><rect x="50.4" y="80.5" width="7.9" height="7.8" fill="#FFFFFF"/><rect x="59.1" y="80.5" width="7.9" height="7.8" fill="#FFFDD2"/><rect x="67.8" y="80.5" width="7.9" height="7.8" fill="#8C8980"/><rect x="76.5" y="80.5" width="7.9" height="7.8" fill="#FFFFFF"/><rect x="25.5" y="89.1" width="9.1" height="4.6" fill="#F1F0EC"/><rect x="35.5" y="89.1" width="9.1" height="4.6" fill="#C3C1B9"/><rect x="45.4" y="89.1" width="9.1" height="4.6" fill="#A9A69D"/><rect x="55.4" y="89.1" width="9.1" height="4.6" fill="#F1F0EC"/><rect x="65.3" y="89.1" width="9.1" height="4.6" fill="#FFFFFF"/><rect x="37.4" y="94.5" width="5.7" height="1.1" fill="#E2A7AB"/><rect x="43.9" y="94.5" width="5.7" height="1.1" fill="#F1F0EC"/><rect x="50.4" y="94.5" width="5.7" height="1.1" fill="#DCDAD3"/><rect x="56.9" y="94.5" width="5.7" height="1.1" fill="#DCDAD3"/></g>
+      <circle cx="50" cy="50" r="46" fill="url(#disco-ombre)"/>
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#100F0D" stroke-width="2.5"/>
+      <path d="M31 22l2.2 6.3 6.3 2.2-6.3 2.2L31 39l-2.2-6.3-6.3-2.2 6.3-2.2Z" fill="#fff"/>
+      <circle cx="62" cy="24" r="2.2" fill="#fff" opacity=".9"/>
+    </symbol>
+    <symbol id="eclat-disco" viewBox="0 0 20 20">
+      <path d="M10 0l2.4 7.6L20 10l-7.6 2.4L10 20l-2.4-7.6L0 10l7.6-2.4Z"/>
+    </symbol>
+  </defs>
+</svg>
 <div class="accueil" id="accueil">
   <div class="accueil__contenu entete">
     <p class="titre"><b>MARIAGE</b> DE<br><b>RAPHAËL</b> &amp; <b>CHARLINE</b></p>
@@ -375,6 +419,21 @@ body{
     Glisser
     <span class="glisser__fleche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
   </button>
+  <div class="disco" aria-hidden="true">
+    <svg class="disco__boule" style="--t:92px;--x:6%;--y:18%;--d:1.7s;--r:0.00s;--rot:38deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__boule" style="--t:58px;--x:30%;--y:4%;--d:1.9s;--r:0.10s;--rot:-30deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__boule" style="--t:120px;--x:58%;--y:26%;--d:1.8s;--r:0.05s;--rot:24deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__boule" style="--t:46px;--x:84%;--y:8%;--d:2.0s;--r:0.15s;--rot:-40deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__boule" style="--t:70px;--x:76%;--y:52%;--d:2.1s;--r:0.08s;--rot:30deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__boule" style="--t:40px;--x:18%;--y:60%;--d:2.2s;--r:0.18s;--rot:-22deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__boule" style="--t:64px;--x:42%;--y:70%;--d:2.3s;--r:0.12s;--rot:34deg"><use href="#boule-disco"/></svg>
+    <svg class="disco__eclat" style="--t:22px;--x:22%;--y:10%;--d:1.8s;--r:0.05s"><use href="#eclat-disco"/></svg>
+    <svg class="disco__eclat" style="--t:16px;--x:70%;--y:14%;--d:2.0s;--r:0.12s"><use href="#eclat-disco"/></svg>
+    <svg class="disco__eclat" style="--t:18px;--x:48%;--y:46%;--d:2.1s;--r:0.02s"><use href="#eclat-disco"/></svg>
+    <svg class="disco__eclat" style="--t:14px;--x:8%;--y:44%;--d:2.2s;--r:0.16s"><use href="#eclat-disco"/></svg>
+    <svg class="disco__eclat" style="--t:20px;--x:90%;--y:36%;--d:1.9s;--r:0.09s"><use href="#eclat-disco"/></svg>
+    <svg class="disco__eclat" style="--t:12px;--x:60%;--y:80%;--d:2.3s;--r:0.20s"><use href="#eclat-disco"/></svg>
+  </div>
 </div>
 
 <div class="page">
@@ -528,7 +587,7 @@ body{
     accueil.classList.add('est-parti');
     racine.classList.remove('accueil-ouvert');
     setTimeout(function(){ tickets.classList.add('est-visible'); }, 450);
-    setTimeout(function(){ accueil.classList.add('est-range'); }, 1600);
+    setTimeout(function(){ accueil.classList.add('est-range'); }, 2700);
   }
   document.getElementById('glisser').addEventListener('click', lever);
   accueil.addEventListener('wheel', function(e){ if (e.deltaY > 0) lever(); }, {passive:true});
