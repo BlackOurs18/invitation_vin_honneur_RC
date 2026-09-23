@@ -350,6 +350,8 @@ body{
   padding-left:1.2em;
 }
 .conditions li{margin-bottom:14px;}
+.conditions li p{margin:10px 0 0;}
+.conditions li .actions{margin:12px 0 0;}
 .merci{
   font-family:'Poppins',sans-serif;
   text-align:center;
@@ -559,10 +561,22 @@ body{
       <li>Venez avec votre bonne humeur. Préparez-vous afin de participer à plusieurs activités, nous comptons sur vous pour jouer le jeu.</li>
       <li>Aucune des deux cérémonies est obligatoires par ailleurs nous vous demandons de respecter nos choix et convictions.</li>
       <li>Si vous souhaitez être dans le thème. Nous vous conseillons de porter du rose, du orange, du jaune ou encore du vert. Par ailleurs ne vous y sentez pas obliger, cela reste votre choix.</li>
+      <li><b>Pour ceux qui le souhaitent… 💛</b>
+        <p>Votre présence à nos côtés pour cette belle journée est déjà un merveilleux cadeau.</p>
+        <p>Pour celles et ceux qui souhaiteraient malgré tout nous faire une petite attention, nous avons préparé une liste de mariage, que vous pouvez retrouver grâce au lien ci-dessous.</p>
+        <p>Une urne sera également à votre disposition le jour du mariage pour ceux qui préféreraient y glisser une petite attention ou un petit mot. 💌</p>
+        <p>Mais surtout, aucune obligation : vos sourires, votre présence et les souvenirs partagés avec vous comptent déjà énormément pour nous.</p>
+        <div class="actions actions--centre">
+          <!-- LIEN DE LA LISTE DE MARIAGE : remplacer href="#" par le lien de la liste -->
+          <a class="bouton" id="lien-liste" target="_blank" rel="noopener" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+            Liste de mariage</a>
+        </div>
+        <p>Merci du fond du cœur pour toutes vos délicates attentions. ❤️</p>
+      </li>
     </ol>
     <div class="actions actions--centre">
-      <!-- LIEN DU GOOGLE FORM : remplacer href="#" par le lien du formulaire -->
-      <a class="bouton" id="bouton-reponse" target="_blank" rel="noopener" href="#">
+      <a class="bouton" id="bouton-reponse" target="_blank" rel="noopener" href="https://forms.gle/1xZTKyeXhztkcngz7">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 4.24V18h16V8.24l-8 5-8-5ZM19.1 6H4.9L12 10.44 19.1 6Z"/></svg>
         Répondre à l’invitation</a>
     </div>
@@ -633,10 +647,12 @@ body{
     }
   });
 
-  /* ----- Bouton de reponse : sans lien renseigne, il ne mene nulle part ----- */
-  var reponse = document.getElementById('bouton-reponse');
-  reponse.addEventListener('click', function(e){
-    if (reponse.getAttribute('href') === '#') e.preventDefault();
+  /* ----- Liens en attente : sans lien renseigne, ils ne menent nulle part ----- */
+  var liensAttente = document.querySelectorAll('#bouton-reponse, #lien-liste');
+  Array.prototype.forEach.call(liensAttente, function(lien){
+    lien.addEventListener('click', function(e){
+      if (lien.getAttribute('href') === '#') e.preventDefault();
+    });
   });
 
   /* ----- Ajout au calendrier (.ics) ----- */
